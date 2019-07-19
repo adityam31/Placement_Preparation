@@ -113,6 +113,34 @@ public class LinkedList 	//Main Linked List Class with operations
 		}
 	}
 	
+	public void reverseList()
+	{
+		
+		if(isEmpty())
+		{
+			System.out.println("\nList Empty.");
+			return;
+		}
+		
+		
+		Node current = head;
+		Node prev = null;
+		Node temp;
+		
+		while(current != null)
+		{
+			temp = current.next;
+			current.next = prev;
+			
+			prev = current;
+			current = temp;
+		}
+		
+		head = prev;
+		
+		System.out.println("\nList Reversed Successfully.\n");
+	}
+	
 	public void printList()
 	{
 		if(isEmpty())
@@ -133,6 +161,28 @@ public class LinkedList 	//Main Linked List Class with operations
 		}
 		System.out.println("\n");
 	}
+	
+	public int middleElement()
+	{
+		if(isEmpty())
+			return -1;
+		
+		int count = 0;
+		Node current = head;
+		Node middle  = head;
+		
+		while(current != null)
+		{
+			count++;
+			
+			if(count%2 == 0)    //incrementing middle only on even count 
+				middle = middle.next;
+	            
+			current = current.next;
+		}
+	        
+		return middle.data;
+	}
 
 	public static void main(String[] args) throws Exception 
 	{
@@ -143,7 +193,7 @@ public class LinkedList 	//Main Linked List Class with operations
 		
 		do
 		{
-			System.out.println("Menu:- \n1.Add Element at End \n2.Add Element at Beiginning \n3.Delete Element \n4.Print List \n0.Exit");
+			System.out.println("Menu:- \n1.Add Element at End \n2.Add Element at Beiginning \n3.Delete Element \n4.Print List \n5.Reverse List \n6.Middle Element \n0.Exit");
 			ans = Integer.parseInt(br.readLine());
 			
 			switch(ans)
@@ -177,9 +227,22 @@ public class LinkedList 	//Main Linked List Class with operations
 				}
 			case 4:
 				{
-					System.out.println();
-					
 					list.printList();
+					break;
+				}
+			case 5:
+				{
+					list.reverseList();
+					break;
+				}
+			case 6:
+				{
+					int middle = list.middleElement();
+					
+					if(middle != -1)
+						System.out.println("\nMiddle Element:- "+middle+"\n");
+					else
+						System.out.println("\nList Empty\n");
 					break;
 				}
 			case 0:
